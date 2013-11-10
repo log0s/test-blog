@@ -8,9 +8,10 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
-var ArticleProvider = require('./articleprovider-memory').ArticleProvider;
+var ArticleProvider = require('./articleprovider-mongodb').ArticleProvider;
 
 var app = express();
+var server = http.createServer(app);
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -73,5 +74,5 @@ app.post('/blog/addComment', function(req, res) {
        });
 });
 
-app.listen(3000);
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+server.listen(3000);
+console.log("Express server started on port %d", server.address().port);
